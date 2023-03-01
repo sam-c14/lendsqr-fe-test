@@ -1,0 +1,594 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.status-inactive {
+  color: #545F7D;
+  background: rgba(84, 95, 125, 0.1098039216);
+}
+
+.status-blacklisted {
+  background: rgba(228, 3, 59, 0.1568627451);
+  color: #E4033B;
+}
+
+.status-active {
+  background: rgba(57, 205, 99, 0.1529411765);
+  color: #39CD62;
+}
+
+.status-pending {
+  background: rgba(233, 179, 0, 0.137254902);
+  color: #E9B200;
+}
+
+@media screen and (max-width: 1024px) {
+  .login-banner {
+    padding-top: 20vh !important;
+  }
+  .login-banner-img {
+    padding-left: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .login-banner-img-container {
+    width: 100% !important;
+  }
+  .login-banner-img-container img {
+    width: 90% !important;
+    height: 100%;
+  }
+  .login-form-container-content main form input {
+    width: 80% !important;
+  }
+  .login-form-container-content main form .input-password-container {
+    width: 80% !important;
+  }
+  .login-form-container-content main form .login-btn-container button {
+    width: 80% !important;
+  }
+  .login-form-container-content main form .forgot-password {
+    margin-block: 0.8rem !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .login-banner-logo {
+    width: 60% !important;
+  }
+  .login-form-container-content main form input {
+    width: 90% !important;
+  }
+  .login-form-container-content main form .input-password-container {
+    width: 90% !important;
+  }
+  .login-form-container-content main form .input-password-container input {
+    width: 80% !important;
+  }
+  .login-form-container-content main form .input-password-container button {
+    width: 20% !important;
+  }
+  .login-form-container-content main form .login-btn-container button {
+    width: 90% !important;
+  }
+}
+@media screen and (max-width: 667px) {
+  .login-banner {
+    padding-top: 0vh !important;
+    width: 100% !important;
+    height: 20% !important;
+    border: none !important;
+    display: flex;
+  }
+  .login-form-container {
+    width: 100% !important;
+    padding-top: 8vh !important;
+  }
+  .login-container {
+    flex-direction: column;
+  }
+  .login-banner-logo {
+    padding-left: 1rem !important;
+  }
+  .login-banner-logo img {
+    margin-inline: 0.2rem !important;
+  }
+  .login-form-container-content main form input {
+    width: 100% !important;
+  }
+  .login-form-container-content main form .input-password-container {
+    width: 100% !important;
+  }
+  .login-form-container-content main form .input-password-container input {
+    width: 80% !important;
+  }
+  .login-form-container-content main form .input-password-container button {
+    width: 20% !important;
+  }
+  .login-form-container-content main form .login-btn-container button {
+    width: 100% !important;
+  }
+}
+.login-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+.login-banner {
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2470588235);
+  border-right: 1px solid rgba(255, 255, 255, 0.5568627451);
+  padding-top: 10vh;
+}
+.login-banner-logo, .login-banner-img {
+  margin-block: 4rem;
+}
+.login-banner-logo {
+  width: 40%;
+  padding-left: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-banner-logo img {
+  margin-inline: 0.6rem;
+}
+.login-banner-img {
+  padding-left: 5vw;
+}
+.login-banner-img-container {
+  width: auto;
+  height: auto;
+}
+.login-banner-img-container img {
+  width: auto;
+  height: auto;
+}
+
+.login-form-container {
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  box-shadow: 0px 15px 90px rgba(0, 0, 0, 0.03);
+  padding-top: 25vh;
+}
+.login-form-container-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.login-form-container-content header, .login-form-container-content main {
+  width: 100%;
+  padding-inline: 5vw;
+  margin-block: 0.5rem;
+}
+.login-form-container-content header {
+  margin-bottom: 1.5rem;
+}
+.login-form-container-content header h1 {
+  font-family: "AvenirNextLTPro-Bold";
+  text-transform: capitalize;
+  color: #213F7D;
+  margin-block: 0.4rem;
+  font-size: 40px;
+}
+.login-form-container-content header p {
+  font-family: sans-serif;
+  color: #545F7D;
+  font-style: normal !important;
+  font-size: 20px;
+  line-height: 27px;
+}
+.login-form-container-content main form input {
+  padding-block: 0.9rem;
+  width: 60%;
+  padding-left: 0.5rem;
+  font-size: medium;
+  border: none;
+  outline: none;
+  border-radius: 0.2rem;
+  border: 2px solid rgba(51, 51, 51, 0.2117647059);
+}
+.login-form-container-content main form .input-password-container {
+  background: white;
+  margin-block: 1.2rem;
+  width: 60%;
+  border-radius: 0.2rem;
+  border: 2px solid rgba(51, 51, 51, 0.2117647059);
+}
+.login-form-container-content main form .input-password-container input {
+  width: 85%;
+  border-radius: 0;
+  border: none;
+}
+.login-form-container-content main form .input-password-container button {
+  width: 15%;
+  text-transform: uppercase;
+  font-size: small;
+  background: transparent;
+  color: #39cdcc;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.login-form-container-content main form .forgot-password {
+  text-transform: uppercase;
+  color: #39cdcc;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+  margin-block: 1.8rem;
+  font-family: "AvenirNextLTPro-Regular";
+}
+.login-form-container-content main form .login-btn-container button {
+  width: 60%;
+  text-transform: uppercase;
+  color: white;
+  background: #39cdcc;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  border: none;
+  border-radius: 0.2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard {
+    display: flex;
+    justify-content: end;
+    width: 100% !important;
+  }
+  .dashboard-content {
+    width: 100% !important;
+    padding-inline: 0.5rem !important;
+    padding-bottom: 5vh !important;
+  }
+}
+@media screen and (max-width: 667px) {
+  .dashboard {
+    display: flex;
+    justify-content: end;
+    width: 100% !important;
+  }
+  .dashboard-content {
+    width: 100% !important;
+    padding-inline: 0.5rem !important;
+    padding-bottom: 5vh !important;
+  }
+  .lg-table {
+    display: none !important;
+  }
+  .sm-table {
+    display: table !important;
+    padding-inline: 0.3rem !important;
+  }
+}
+.disable-scroll {
+  overflow: hidden;
+}
+
+.dashboard-container {
+  background: rgba(255, 255, 255, 0.2470588235);
+  height: 100vh;
+  overflow: scroll;
+}
+.dashboard-container::-webkit-scrollbar {
+  width: 0;
+}
+
+.dashboard {
+  display: flex;
+  justify-content: end;
+  width: 96%;
+  font-family: "Work Sans", sans-serif;
+}
+.dashboard-content {
+  width: 80%;
+  padding-left: 1.2rem;
+  padding-bottom: 50vh;
+}
+.dashboard-content header {
+  padding-top: 8vh;
+  padding-bottom: 5vh;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #213F7D;
+}
+.dashboard-content section {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+.dashboard-content section .card {
+  background: white;
+  width: 25%;
+  padding-block: 1rem;
+  padding-inline: 1rem;
+  border: 1px solid rgba(33, 63, 125, 0.06);
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+}
+.dashboard-content section .card-img {
+  margin-block: 0.5rem;
+}
+.dashboard-content section .card-title {
+  margin-block: 0.5rem;
+  text-transform: uppercase;
+  color: #213F7D;
+  font-size: 0.81rem;
+}
+.dashboard-content section .card-count {
+  margin-block: 0.5rem;
+  color: #213F7D;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+.dashboard-content main {
+  margin-bottom: 1rem;
+}
+.dashboard-content main table {
+  display: table;
+  width: 100%;
+  padding-inline: 1rem;
+}
+.dashboard-content main table th {
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #213F7D;
+  display: table-row;
+  background: #FFFFFF;
+  border: 1px solid rgba(33, 63, 125, 0.06);
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  border: 2px solid green;
+  padding-block: 0.5rem;
+}
+.dashboard-content main table th td {
+  text-align: start;
+  margin-right: 0.5rem;
+}
+.dashboard-content main table tr {
+  font-size: 0.81rem;
+  display: table-row;
+  border-bottom-width: 4px !important;
+}
+.dashboard-content main table tr td {
+  text-align: start;
+  padding-block: 1rem;
+}
+.dashboard-content main table tr .options {
+  display: flex;
+  font-weight: 400;
+  justify-content: end;
+}
+.dashboard-content main table tr .status {
+  width: 10%;
+}
+.dashboard-content main table tr .status div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  width: 85%;
+  padding-inline: 0.2rem;
+  text-transform: capitalize;
+  font-size: 0.81rem;
+  border-radius: 100px;
+}
+.dashboard-content main .sm-table {
+  display: none;
+}
+.dashboard-content main .sm-table-tb .capitalize {
+  text-transform: capitalize;
+}
+.dashboard-content footer {
+  -webkit-margin-before: 1rem;
+          margin-block-start: 1rem;
+}
+.dashboard-content footer .footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+.dashboard-content footer .footer-content .current-page {
+  width: 50%;
+}
+.dashboard-content footer .footer-content .current-page div div {
+  display: flex;
+  align-items: center;
+}
+.dashboard-content footer .footer-content .current-page div div .current-page-no {
+  margin-inline: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  background: rgba(84, 95, 125, 0.1098039216);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 14%;
+}
+.dashboard-content footer .footer-content .current-page div div .total-pages-no {
+  margin-left: 0.2rem;
+}
+.dashboard-content footer .footer-content .users-count {
+  display: flex;
+  align-items: center;
+  width: 25%;
+}
+.dashboard-content footer .footer-content .users-count .prev-page, .dashboard-content footer .footer-content .users-count .next-page {
+  background: rgba(84, 95, 125, 0.1098039216);
+  width: 10%;
+  margin-inline: 0.5rem;
+  padding-block: 0.3rem;
+  display: flex;
+  justify-content: center;
+  font-size: 0.8em;
+}
+.dashboard-content footer .footer-content .users-count .pages {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+.dashboard-content footer .footer-content .users-count .pages-current {
+  font-weight: 500;
+}
+
+.nav {
+  background: white;
+  padding-block: 1rem;
+  box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
+  font-family: "Work Sans", sans-serif;
+  -webkit-padding-end: 1rem;
+          padding-inline-end: 1rem;
+}
+.nav-items {
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  -webkit-padding-start: 1.2rem;
+          padding-inline-start: 1.2rem;
+  -webkit-padding-end: 3vw;
+          padding-inline-end: 3vw;
+}
+.nav-items-logo-container {
+  display: flex;
+  align-items: center;
+}
+.nav-items-logo-container div {
+  margin-inline: 0.4rem;
+}
+.nav-items-search {
+  width: 30%;
+}
+.nav-items-search-container {
+  display: flex;
+  background: white;
+  border: 1px solid rgba(51, 51, 51, 0.3843137255);
+  border-radius: 8px;
+  padding-left: 0.2rem;
+}
+.nav-items-search-container input {
+  padding-block: 0.8rem;
+  width: 85%;
+  border: none;
+  outline: none;
+  padding-left: 0.8rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 400;
+}
+.nav-items-search-container div {
+  width: 15%;
+  color: white;
+  font-size: 1.2rem;
+  background-color: #39cdcc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-items-details-container {
+  display: flex;
+  width: 17%;
+  justify-content: space-between;
+}
+.nav-items-details-container .link {
+  display: flex;
+  align-items: center;
+}
+.nav-items-details-container .link a {
+  color: #213F7D;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+.nav-items-details-container .bell {
+  display: flex;
+  align-items: center;
+}
+.nav-items-details-container .profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 55%;
+  color: #213F7D;
+}
+.nav-items-details-container .profile div {
+  border-radius: 9999px;
+}
+.nav-items-details-container .profile div img {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+}
+.nav-items-details-container .profile p {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 500;
+}
+
+.sidebar {
+  position: absolute;
+  background: #FFFFFF;
+  height: calc(100vh - 5.2rem);
+  width: calc(20vw - 1rem);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.04);
+  font-family: "Work Sans", sans-serif;
+  font-weight: 400;
+  overflow-y: scroll;
+}
+.sidebar::-webkit-scrollbar {
+  width: 0px;
+}
+
+.sidebar-content {
+  padding: 1.2rem 1.5rem 1rem 1rem;
+  height: 100%;
+  color: #213F7D;
+}
+.sidebar-content header {
+  background: white;
+  padding-right: 0.5rem;
+}
+.sidebar-content header div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block: 0.8rem;
+}
+.sidebar-content header div:hover {
+  background: rgba(57, 205, 204, 0.1);
+}
+.sidebar-content header .dashboard {
+  width: 52%;
+}
+.sidebar-content .customize, .sidebar-content .business, .sidebar-content .settings {
+  background: white;
+}
+.sidebar-content .customize header, .sidebar-content .business header, .sidebar-content .settings header {
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  margin-block: 1rem;
+}
+.sidebar-content .customize main div, .sidebar-content .business main div, .sidebar-content .settings main div {
+  display: flex;
+  margin-block: 0.5rem;
+  align-items: center;
+  padding-block: 0.1rem;
+}
+.sidebar-content .customize main div:hover, .sidebar-content .business main div:hover, .sidebar-content .settings main div:hover {
+  background: rgba(57, 205, 204, 0.1);
+}
+.sidebar-content .customize main div p, .sidebar-content .business main div p, .sidebar-content .settings main div p {
+  margin-left: 1.2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    display: none !important;
+  }
+}/*# sourceMappingURL=App.css.map */

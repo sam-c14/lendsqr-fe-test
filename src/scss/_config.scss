@@ -1,0 +1,59 @@
+$primary-color : #213F7D;
+$secondary-color : #39cdcc;
+$text-color : #545F7D;
+$bg : #ffffff3f;
+$font-family-next-bold :  "AvenirNextLTPro-Bold";
+$font-family-next-light :  "AvenirNextLTPro-It";
+$font-family-next-regular :  "AvenirNextLTPro-Regular";
+$opacity-value:0.5;
+$inactive-bg:  #545f7d1c;;
+$pending-bg: #e9b30023;
+$blacklisted-bg:  #e4033b28;
+$active-bg:#39cd6327;
+$inactive-text-color:  #545F7D;;
+$pending-text-color: #E9B200;
+$blacklisted-text-color:  #E4033B;
+$active-text-color:#39CD62;
+
+@mixin flexCenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@mixin media-md{
+    @media screen and (max-width : 768px) {
+        @content
+    }
+}
+@mixin media-lg{
+    @media screen and (max-width : 1024px) {
+        @content
+    }
+}
+@mixin media-sm{
+    @media screen and (max-width : 667px) {
+        @content
+    }
+}
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.status-inactive{
+    color: $inactive-text-color;
+    background: $inactive-bg;
+}
+.status-blacklisted{
+    background: $blacklisted-bg;
+    color: $blacklisted-text-color;
+}
+.status-active{
+    background: $active-bg;
+    color: $active-text-color;
+}
+.status-pending{
+    background: $pending-bg;
+    color: $pending-text-color;
+}

@@ -1,0 +1,47 @@
+@include media-md{
+    .dashboard {
+            display: flex;
+            justify-content: end;
+            width: 100% !important;
+    
+            &-content {
+                width: 100% !important;
+                padding-inline: 0.5rem !important;
+                padding-bottom: 5vh !important;
+            }
+    }    
+}
+@include media-sm{
+    .dashboard {
+            display: flex;
+            justify-content: end;
+            width: 100% !important;
+    
+            &-content {
+                width: 100% !important;
+                padding-inline: 0.5rem !important;
+                padding-bottom: 5vh !important;
+            }
+    }
+    section{
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .card{
+            width: 45% !important;
+        }
+    }
+    .lg-table{
+        display: none !important;
+    }
+    .sm-table{
+        display: table !important;
+        padding-inline: 0.3rem !important;
+
+        table {
+            border: 1px solid #33333369;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+    }    
+}
