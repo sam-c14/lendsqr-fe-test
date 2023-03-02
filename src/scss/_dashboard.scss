@@ -82,11 +82,11 @@
                     border-radius: 4px;
                     font-size: 0.75rem;
                     border: 2px solid green;
-                    padding-block: 0.5rem;
 
                     td{
                         text-align: start;
                         // font-size: 0.81rem;
+                        padding-block: 0.5rem;
                         margin-right: 0.5rem;
                     }
                 }
@@ -97,13 +97,44 @@
 
                     td{
                         text-align: start;
-                        // font-size: 0.81rem;
+                        font-size: 0.81rem;
                         padding-block: 1rem;
                     }
                     .options{
                         display: flex;
                         font-weight: 400;
-                        justify-content: end
+                        justify-content: end;
+                        position: relative;
+
+                        &-menu{
+                            position: absolute;
+                            top: 0;
+                            z-index: 1;
+                            background: #FFFFFF;
+                            border: 1px solid rgba(84, 95, 125, 0.04);
+                            box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+                            right: -25%;
+                            border-radius: 4px;
+                            width: 12vw;
+                            display: none;
+                            padding-block:0.5rem;
+
+                            div{
+                                 @include flexCenter;
+                                 justify-content: start;
+                                 padding-inline-start: 0.5rem;
+                                padding-block: 0.3rem;
+
+                                 p{
+                                    margin-left: 0.5rem;
+                                 }
+                            }
+
+                            .eye{
+                                @include flexCenter;
+                                width: 80%;
+                            }
+                        }
                     }
                     .status{
                         width: 10%;
@@ -193,4 +224,7 @@
             }
         }
     }
+}
+.block{
+    display: block !important;
 }

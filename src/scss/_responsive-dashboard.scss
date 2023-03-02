@@ -8,8 +8,23 @@
                 width: 100% !important;
                 padding-inline: 0.5rem !important;
                 padding-bottom: 5vh !important;
+
+                main{ 
+
+                table {
+                    display: table;
+                    width: 100%;
+                    padding-inline: 1rem;
+
+                    tr{
+                        
+                        td{
+                            font-size: 0.7rem !important;
+                        }
+                    }
+                }
             }
-    }    
+    }   } 
 }
 @include media-sm{
     .dashboard {

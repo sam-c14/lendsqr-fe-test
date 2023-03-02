@@ -23,6 +23,7 @@
         div{
             display: flex;
             justify-content: space-between;
+            border-right: 1px solid white;
             align-items: center;
             margin-block: 0.8rem;
             &:hover {

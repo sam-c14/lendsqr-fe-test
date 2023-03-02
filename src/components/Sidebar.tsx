@@ -136,7 +136,7 @@ const Sidebar = () => {
             <main>
               {
                 customers.map((customer)=>(
-                <div>
+                <div key={customer.text}>
                   <div><img src={customer.src} alt="users" /></div>
                   <p>{customer.text}</p>
               </div>
@@ -151,7 +151,7 @@ const Sidebar = () => {
             <main>
               {
                 business.map((customer)=>(
-                <div>
+                <div key={customer.text}>
                   <div><img src={customer.src} alt="users" /></div>
                   <p>{customer.text}</p>
               </div>
@@ -166,7 +166,7 @@ const Sidebar = () => {
             <main>
               {
                 settings.map((customer)=>(
-                <div>
+                <div key={customer.text}>
                   <div><img src={customer.src} alt="users" /></div>
                   <p>{customer.text}</p>
               </div>

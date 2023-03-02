@@ -4,12 +4,12 @@ import ActiveUsers from '../assests/images/ActiveUsers.svg'
 import LoanedUsers from '../assests/images/LoanedUsers.svg'
 import SavingsUsers from '../assests/images/SavingsUsers.svg'
 import TotalUsers from '../assests/images/TotalUsers.svg'
-import {BsThreeDotsVertical} from 'react-icons/bs'
-import {TfiAngleDown} from 'react-icons/tfi'
-import {TfiAngleLeft} from 'react-icons/tfi'
-import {TfiAngleRight} from 'react-icons/tfi'
+import {BsThreeDotsVertical,BsEye} from 'react-icons/bs'
+import {TfiAngleDown,TfiAngleRight,TfiAngleLeft} from 'react-icons/tfi'
+import UserCheck from '../assests/images/user-check.svg'
+import UserTimes from '../assests/images/user-times.svg'
 import UserBar from '../assests/images/UserBar.svg'
-import React from 'react'
+import React,{useRef} from 'react'
 
   type Card = Array<{src:string,title:string,count:string}>;
   type UserDetail = Array<{org:string,username:string,email:string,phoneNo:string,date:string,status:string,statusClass:string}>;
@@ -126,7 +126,6 @@ export default class Dashboard extends React.Component {
   }
   componentWillUnmount() {
     document.documentElement.classList.remove('disable-scroll')
-    // Output: Counter has been unmounted!
   }
 
   render (){
@@ -171,7 +170,21 @@ export default class Dashboard extends React.Component {
                     <td className='phone-number'>{userDetail.phoneNo}</td>
                     <td className='date'>{userDetail.date}</td>
                     <td className='status'><div className={userDetail.statusClass}>{userDetail.status}</div></td>
-                    <td className='options'><BsThreeDotsVertical /></td>
+                    <td className='options'><BsThreeDotsVertical />
+                    <div className='options-menu'>
+                      <div className='eye'>
+                        <BsEye />
+                        <p>View Details</p>
+                      </div>
+                      <div>
+                        <div><img src={UserTimes} alt="bad user" /></div>
+                        <p>Blacklist User</p>
+                      </div>
+                      <div>
+                        <div><img src={UserCheck} alt="good user" /></div>
+                        <p>Activate User</p>
+                      </div>
+                    </div></td>
                   </tr>
                   ))
                 }
