@@ -19,102 +19,123 @@ import Transactions from '../assests/images/Transactions.svg'
 import UserCheck from '../assests/images/user-check.svg'
 import UserCog from '../assests/images/user-cog.svg'
 import UserTimes from '../assests/images/user-times.svg'
+import LogoutImg from '../assests/images/LogoutImg.svg'
+import {onDetailsPage,SidebarType} from '../types/globalTypes'
 import {FaAngleDown} from 'react-icons/fa'
-
 import React from 'react'
 
-const Sidebar = () => {
-  type Customers = Array<{src:string,text:string}>;
-  const customers : Customers = [
+const Sidebar = ({detailClass,activeClass}: onDetailsPage)  => {
+
+  const customers : SidebarType = [
     {
       src : UserFriends,
-      text : 'Users'
+      text : 'Users',
+      name : 'users'
     },
     {
       src : Users,
-      text : 'Guarantors'
+      text : 'Guarantors',
+      name : 'guarantors'
     },
     {
       src : Sack,
-      text : 'Loans'
+      text : 'Loans',
+      name : 'loans'
     },
     {
       src : HandshakeRegular,
-      text : 'Fees and Charges'
+      text : 'Fees and Charges',
+      name : 'fees-charges'
     },
     {
       src : PiggyBank,
-      text : 'Savings'
+      text : 'Savings',
+      name : 'savings'
     },
     {
       src : Loan,
-      text : 'Loan Requests'
+      text : 'Loan Requests',
+      name : 'loan-req'
     },
     {
       src : UserCheck,
-      text : 'Whitelist'
+      text : 'Whitelist',
+      name : 'whitelist'
     },
     {
       src : UserTimes,
-      text : 'Karma'
+      text : 'Karma',
+      name : 'karma'
     }
   ]
-  const business : Customers = [
+  const business : SidebarType = [
     {
       src : Briefcase,
-      text : 'Organization'
+      text : 'Organization',
+      name : 'org'
     },
     {
       src : Loan,
-      text : 'Loan Products'
+      text : 'Loan Products',
+      name : 'loan-prod'
     },
     {
       src : Bank,
-      text : 'Savings Products'
+      text : 'Savings Products',
+      name : 'save-prod'
     },
     {
       src : CoinsSolid,
-      text : 'Fees and Charges'
+      text : 'Fees and Charges',
+      name : 'fees-charge-business'
     },
     {
       src : Transactions,
-      text : 'Transactions'
+      text : 'Transactions',
+      name : 'transactions'
     },
     {
       src : Galaxy,
-      text : 'Services'
+      text : 'Services',
+      name : 'services'
     },
     {
       src : UserCog,
-      text : 'Service Account'
+      text : 'Service Account',
+      name : 'service-acc'
     },
     {
       src : Scroll,
-      text : 'Settlements'
+      text : 'Settlements',
+      name : 'settlements'
     },
     {
       src : ChartBar,
-      text : 'Reports'
+      text : 'Reports',
+      name : 'reports'
     }
   ]
-  const settings : Customers = [
+  const settings : SidebarType = [
     {
       src : SlidersH,
-      text : 'Preferences'
+      text : 'Preferences',
+      name : 'prefs'
     },
     {
       src : BadgePercent,
-      text : 'Fees and Pricing'
+      text : 'Fees and Pricing',
+      name : 'fees-pricings'
     },
    
     {
       src : ClipboardList,
-      text : 'Audit Logs'
+      text : 'Audit Logs',
+      name : 'audit-logs'
     },
   ]
 
   return (
-    <div className='sidebar'>
+    <div className='sidebar' id={detailClass}>
         <div className='sidebar-content'>
           <header className=''>
             <div className='organization'>
@@ -122,11 +143,11 @@ const Sidebar = () => {
               <p>Switch Organization</p>
               <FaAngleDown />
             </div>
-            <div className='dashboard'>
-              <div>
-                <div><img src={Home} alt="Dashboard" /></div>
-                <p>Dashboard</p>
-              </div>
+            <div className='dash-home'>
+                <div>
+                  <img src={Home} alt="Dashboard" />
+                </div>
+                  <p>Dashboard</p>
             </div>
           </header>
           <section className='customize'>
@@ -136,7 +157,7 @@ const Sidebar = () => {
             <main>
               {
                 customers.map((customer)=>(
-                <div key={customer.text}>
+                <div id={customer.name === activeClass ? 'active' : ''} key={customer.text}>
                   <div><img src={customer.src} alt="users" /></div>
                   <p>{customer.text}</p>
               </div>
@@ -151,7 +172,7 @@ const Sidebar = () => {
             <main>
               {
                 business.map((customer)=>(
-                <div key={customer.text}>
+                <div id={customer.name === activeClass ? 'active' : ''} key={customer.text}>
                   <div><img src={customer.src} alt="users" /></div>
                   <p>{customer.text}</p>
               </div>
@@ -166,7 +187,7 @@ const Sidebar = () => {
             <main>
               {
                 settings.map((customer)=>(
-                <div key={customer.text}>
+                <div id={customer.name === activeClass ? 'active' : ''} key={customer.text}>
                   <div><img src={customer.src} alt="users" /></div>
                   <p>{customer.text}</p>
               </div>
@@ -174,6 +195,19 @@ const Sidebar = () => {
               }
             </main>
           </section>
+          {
+            detailClass === 'details-page' ? <section className='log-out'>
+            <main>
+              <div className='log-out-btn'>
+                <div><img src={LogoutImg} alt="users" /></div>
+                <p>logout</p>
+              </div>
+                <div className='version'>
+                <p>v.1.2.0</p>
+                </div>
+            </main>
+          </section> : ''
+          }
         </div>
     </div>
   )

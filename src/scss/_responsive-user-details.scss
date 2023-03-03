@@ -1,0 +1,139 @@
+@include media-lg{
+
+    .dashboard-content {
+        padding-left: 4vw;
+
+        header {
+
+            .content-2{
+
+                &-btns{
+                    display: flex;
+                    justify-content: end;
+
+                    button{
+                        font-size: 0.8rem !important;
+                        width: 40% !important;
+                    }
+                }
+            }
+        }
+
+
+        main {
+        
+            section {
+
+                .details-tab{
+                
+                    &-nav{
+                        font-size: 0.8rem;
+                    }
+                }
+
+                .info {
+                    padding-right: 0 !important;
+
+                    font-size: 0.9rem !important;
+                }
+            
+        }        
+    }
+}
+}
+@include media-sm{
+
+    .dashboard-content {
+        padding-left: 4vw;
+
+        header {
+
+            .content-2{
+                display: flex !important;
+                flex-wrap: wrap;
+
+                & > div{
+                    width: 100% !important;
+                    margin-block: 0.5rem;
+                }
+
+                h3{
+                    font-size: 1.2rem !important;
+                    margin-left: 0.5rem;
+                }
+
+                &-btns{
+                    display: flex;
+                    justify-content: initial !important;
+
+                    button{
+                        font-size: 0.8rem !important;
+                        width: 45% !important;
+                    }
+                }
+            }
+        }
+
+
+        main {
+        
+            section {
+
+                .details-tab{
+
+                    &-head{
+                        flex-wrap: wrap;
+                        justify-content: center;
+
+                        &-profile{
+
+                            &-img{
+                                width: 6rem;
+                                height: 6rem;
+                                img{
+                                    width: 100% !important;
+                                    height: 100% !important;
+                                }
+                            }
+                        }
+
+                        &-account{
+                            margin-top: 1rem;
+                        }
+                    }
+                
+                    &-nav{
+                        font-size: 0.8rem;
+                        overflow-x: scroll;
+                        &::-webkit-scrollbar {
+                                width: 0px;
+                        }
+
+                        ul{
+
+                            li{
+                                margin-inline: 1rem !important;
+                                white-space: nowrap;
+                                width: 500px !important;
+                                // background: red;
+                                display: flex;
+                                align-items: center;
+                            }
+                        }
+                    }
+                }
+
+                .info {
+                    
+                    &-user{
+
+                        &-data{
+                            grid-template-columns: repeat(2, 1fr) !important;
+                        }
+                    }
+                }
+            
+        }        
+    }
+}
+}

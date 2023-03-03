@@ -1,0 +1,209 @@
+@import './responsive-user-details';
+
+.dashboard {
+
+    &-content {
+        padding-left: 4vw;
+
+        header {
+
+            div{
+                display: flex;
+
+                p{
+                    font-size: 1rem;
+                }
+            }
+
+            .content-2{
+                justify-content: space-between;
+                margin-block: 1rem;
+                div{
+                    width: 50%;
+
+                    h3{
+                        font-weight: 500;
+                    }
+                }
+
+                &-btns{
+                    display: flex;
+                    justify-content: end;
+
+                    button{
+                        width: 32%;
+                        margin-inline: 0.5rem;
+                        padding-block: 0.6rem;
+                        text-transform: uppercase;
+                        letter-spacing: 0.08em;
+                        font-weight: 600;
+                        border-radius: 6px;
+                        background: transparent;
+                        cursor: pointer;
+                        transition: all 0.5s linear;
+                    }
+                    &-reset{
+                        border: 1px solid $blacklisted-text-color;
+                        color: $blacklisted-text-color;
+
+                        &:hover{
+                            background: $blacklisted-text-color;
+                            color: white;
+                        }
+                    }   
+                    &-activate{
+                        border: 1px solid $active-text-color;
+                        color: $active-text-color;
+
+                        &:hover{
+                            background: $active-text-color;
+                            color: white;
+                        }
+                    }   
+                }
+            }
+        }
+    }
+
+    #user-content{
+        padding-bottom: 0 !important;
+    }
+
+    main{
+
+        section{
+
+            .details-tab{
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                padding-top: 1rem;
+                padding-inline: 1rem;
+                background: #ffffff;
+                border: 1px solid rgba(33, 63, 125, 0.06);
+                box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+                border-radius: 4px;
+
+                &-head, &-nav{
+                    width: 100%;
+                    display: flex;
+                }
+
+                &-head{
+                    align-items: center;
+
+                    &-profile{
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;  
+
+                        &-img{
+                            img{
+                                border-radius: 100px;
+                            }
+                        }
+
+                        &-info{
+                            div{
+                                h3{
+                                    margin-bottom: 0.5rem;
+                                }
+                            }
+                        }
+                    }
+
+                    &-rating{
+                        div{
+                            margin-top: 0.5rem;
+                            padding-right: 1.5rem;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            color: $pending-text-color;
+                        }
+                    }
+                    &-account{
+                        div{
+                            h3{
+                                margin-bottom: 0.5rem;
+                            }
+                        }
+                    }
+                }
+
+                &-nav{
+                    margin-top: 2rem;
+                    
+                    ul{
+                        display: flex;
+                        width : 100%;
+
+                        li{
+                            width : 15.677%;
+                            text-align: center;
+                            padding-bottom: 0.6rem;
+                            border-bottom: 3px solid transparent;
+                            margin-inline: 0.5rem;
+                            transition: all 0.5s;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+
+            .info{
+                border: 1px solid rgba(33, 63, 125, 0.06);
+                box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+                border-radius: 4px;
+                width: 100%;
+                padding: 1rem 2.5rem 1rem 1rem;
+
+                &-user{
+                    margin-block: 1rem;
+                    border-bottom: 1px solid $inactive-bg;
+                    padding-bottom: 1.5rem;
+                    h4{
+                        margin-block: 0.5rem;
+                        font-weight: 500;
+                    }
+
+                    &-data{
+                        display: grid;
+                        grid-template-columns: repeat(5,1fr);
+                        row-gap: 1rem;
+
+                        div{
+                            word-break: break-all;
+                            padding-right: 0.6rem;
+
+                            .label{
+                                text-transform: uppercase;
+                                margin-block: 0.5rem;
+                                color:$text-color;
+                            }
+                            .value{
+                                color: $primary-color;
+                                font-weight: 500;
+                            }
+                        }
+                    }
+                    #edu{
+                        grid-template-columns: repeat(4, 1fr);
+                    }
+                }
+            }
+        }
+    }
+}
+hr{
+    color: black;
+    width: 6%;
+    transform: rotate(90deg);
+    height: 1px;
+}
+.last-info{
+    border: none !important;
+}
+#users{
+    overflow: initial !important;
+}

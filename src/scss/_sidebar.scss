@@ -13,29 +13,29 @@
     }
 }
 .sidebar-content{
-    padding: 1.2rem 1.5rem 1rem 1rem;
+    padding: 1.2rem 0 1rem 0;
     height: 100%;
     color: $primary-color;
 
     header{
         background: white;
-        padding-right: 0.5rem;
-        div{
+
+       & > div{
             display: flex;
             justify-content: space-between;
-            border-right: 1px solid white;
             align-items: center;
-            margin-block: 0.8rem;
-            &:hover {
-                background: rgba($secondary-color
-                    , $alpha: 0.1);
-            }
+            margin-block: 1rem;
+            padding-block: 0.5rem;
+            padding-inline: 0.9rem;
+            cursor: pointer;
         }
-        .dashboard{
-            width: 100%;
 
-            div{
-                width: 55%;
+
+        .dash-home{
+            justify-content: start !important;
+
+            p{
+                margin-left: 1rem;
             }
         }
     }
@@ -47,20 +47,18 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             margin-block: 1rem;
+            padding-left: 1rem;
         }
 
         main{
 
-            div{
+           & > div{
                 display: flex;
                 margin-block: 0.5rem;
                 align-items: center;
-                padding-block: 0.1rem;
-
-                &:hover {
-                    background: rgba($secondary-color
-                    , $alpha: 0.1);
-                }
+                padding-block: 0.5rem;
+                padding-inline: 0.9rem;
+                cursor: pointer;
 
                 p{
                     margin-left: 1.2rem;
@@ -68,6 +66,44 @@
             }
         }
     }
+
+    .log-out{
+        padding-top: 1rem;
+        border-top: 1px solid rgba($primary-color, $alpha: 0.1);
+
+        main{
+            font-weight: 500;
+            margin-block: 1rem;
+            
+
+            & > div{
+                display: flex;
+                flex-wrap: wrap;
+                text-transform: capitalize;
+                padding-left: 1.5rem;
+
+                & > p{
+                    margin-left: 1.5rem;
+                }
+            }
+            .version{
+                width: 100%;
+                text-transform: none;
+                font-size: 0.8rem;
+                margin-top: 2.5rem;
+                padding-left: 0;
+                display: flex;
+                justify-content: flex-start;
+            }
+        }
+
+        &-btn{
+            padding-block: 0.7rem;
+        }
+    }
+}
+#details-page{
+    overflow: initial;
 }
 @include media-md{
     .sidebar {

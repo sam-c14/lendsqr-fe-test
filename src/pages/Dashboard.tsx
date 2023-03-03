@@ -9,10 +9,9 @@ import {TfiAngleDown,TfiAngleRight,TfiAngleLeft} from 'react-icons/tfi'
 import UserCheck from '../assests/images/user-check.svg'
 import UserTimes from '../assests/images/user-times.svg'
 import UserBar from '../assests/images/UserBar.svg'
+import {Card,UserDetails} from '../types/globalTypes'
 import React,{useRef} from 'react'
 
-  type Card = Array<{src:string,title:string,count:string}>;
-  type UserDetail = Array<{org:string,username:string,email:string,phoneNo:string,date:string,status:string,statusClass:string}>;
 
 export default class Dashboard extends React.Component {
    cards : Card = [
@@ -37,7 +36,7 @@ export default class Dashboard extends React.Component {
       count : "102,453" 
     },
     ]
-    usersDetails : UserDetail = [
+    usersDetails : UserDetails = [
       {
         org : "Lendsqr",
         username : "Adedeji",
@@ -133,7 +132,7 @@ export default class Dashboard extends React.Component {
     <div className='container'>
     <Navbar />
     <div className='dashboard-container'>
-        <Sidebar />
+        <Sidebar activeClass='users' detailClass={'none'}/>
         <div className='dashboard'>
          <div className='dashboard-content'>
           <header>

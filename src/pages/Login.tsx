@@ -1,5 +1,5 @@
-import Logo from "../assests/images/Logo.svg"
 import SigInInImg from "../assests/images/SigInInImg.svg"
+import Logo from "../assests/images/Logo.svg"
 import Lendsqr from '../assests/images/lendsqr.svg'
 import React from 'react'
 
@@ -31,7 +31,9 @@ const Login = () => {
                 </header>
                 <main>
                     <form action="">
-                        <input type="email" id="email-input" placeholder="Email"/>
+                        <input type="email" id="email-input"
+                        autoComplete='off'
+                        placeholder="Email"/>
                         <div className="input-password-container">
                             <input type="password" id="password-input" placeholder="Password"/>
                             <button onClick={showPassword}>show</button>

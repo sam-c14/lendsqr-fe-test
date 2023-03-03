@@ -9,19 +9,9 @@ import {TfiAngleDown,TfiAngleRight,TfiAngleLeft} from 'react-icons/tfi'
 import UserCheck from '../assests/images/user-check.svg'
 import UserTimes from '../assests/images/user-times.svg'
 import UserBar from '../assests/images/UserBar.svg'
-import React, { MouseEventHandler } from 'react'
-
-  type Card = Array<{src:string,title:string,count:string}>;
-  type UserDetail = Array<{accountBalance:string,accountName:string,createdAt:string,education:object,email:string,guarantor:string,id:string,lastActiveString:string,orgName:string,phoneNumber:string,profile:object,socials:object,userName:string}>;
-  interface User {
-    users: UserDetail;
-    isLoading: Boolean;
-    tempUserArr : UserDetail;
-    prevPageCount : number;
-    nextPageCount : number;
-    pageCount : number,
-    isFiltered : Boolean
-    }
+import {Link} from "react-router-dom";
+import {Card,UserDetail2,User} from '../types/globalTypes'
+import React from 'react'
 
 export default class Dashboard extends React.Component {
    cards : Card = [
@@ -46,7 +36,7 @@ export default class Dashboard extends React.Component {
       count : "102,453" 
     },
     ]
-    usersDetails : UserDetail = []
+    usersDetails : UserDetail2 = []
 
     state : User = {
     users: [],
@@ -55,7 +45,9 @@ export default class Dashboard extends React.Component {
     prevPageCount : 0,
     nextPageCount : 9,
     pageCount : 1,
-    isFiltered : false
+    isFiltered : false,
+    totalPages : 0,
+    tableRows : 9
   }
 
     tempUserDetails = [1,2,3,4,5,6,7,8,9,10]
@@ -69,10 +61,8 @@ export default class Dashboard extends React.Component {
     fetch('https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users ').then(info=>info.json()).then(data=>{
         this.setState({users : data,isLoading : false,tempUserArr : this.state.users.slice(this.state.prevPageCount,this.state.nextPageCount)})
         console.log(this.state.users)
+        this.setState({totalPages : Math.ceil(this.state.users.length / this.state.tableRows)})
     }).catch(err=>console.log(err))
-    // setTimeout(()=>console.log(this.state.users),3000)
-    // fetch('https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/1').then(info=>info.json()).then(data=>console.log(data)).catch(err=>console.log(err))
-    // console.log(this.testArr.slice(0,12))
   }
   componentWillUnmount() {
     document.documentElement.classList.remove('disable-scroll')
@@ -86,28 +76,38 @@ export default class Dashboard extends React.Component {
         ])// To toggle optionsMenu if the outside of the container is clicked
   }
 
+  checkPageCount = (pageCount : number) =>(
+    pageCount <= this.state.totalPages ?   this.setState({pageCount : pageCount}) : ''
+  )
+
   showFilter = ()=>(
-    !document.querySelector('.filter')?.classList.contains('block') ? document.querySelector('.filter')?.classList.add('block') :  console.log(this.state.users)
+    !document.querySelector('.filter')?.classList.contains('block') ? document.querySelector('.filter')?.classList.add('block') :  document.querySelector('.filter')?.classList.remove('block')
   )
   showOptions(e : React.MouseEvent<HTMLSpanElement>){
     e.currentTarget.nextElementSibling?.classList.add('block')
     }
+
+    changePages = (e : React.MouseEvent<HTMLDivElement>) =>(
+        this.state.prevPageCount > 0 && e.currentTarget.classList.contains("prev-page") ? this.showPrevPage() : '',
+        this.state.nextPageCount < this.state.users.length && e.currentTarget.classList.contains('next-page') ? this.showNextPage() : ''
+    )
+
     showPrevPage = () =>{
         const nextPage = this.state.prevPageCount
-        const prevPage = this.state.prevPageCount - 9
+        const prevPage = this.state.prevPageCount - this.state.tableRows
         const pageCount = this.state.pageCount - 1
+        this.checkPageCount(pageCount)
         this.setState({prevPageCount : prevPage})
         this.setState({nextPageCount : nextPage})
-        this.setState({pageCount : pageCount})
         this.setState({tempUserArr : this.state.users.slice(prevPage,nextPage)})
     }       
     showNextPage = () =>{
         const prevPage = this.state.nextPageCount
-        const nextPage = this.state.nextPageCount + 9
+        const nextPage = this.state.nextPageCount + this.state.tableRows
         const pageCount = this.state.pageCount + 1
+        this.checkPageCount(pageCount)
         this.setState({prevPageCount : prevPage})
         this.setState({nextPageCount : nextPage})
-        this.setState({pageCount : pageCount})
         this.setState({tempUserArr : this.state.users.slice(prevPage,nextPage)})
     }
     hideFilter = (e :  React.MouseEvent<HTMLButtonElement>) =>(
@@ -146,12 +146,27 @@ export default class Dashboard extends React.Component {
         this.setState({tempUserArr : this.state.users.slice(this.state.prevPageCount,this.state.nextPageCount)})
     }
 
+    setTable = (count : number) =>{
+      const counter = count
+      this.setState({prevPageCount : 0})
+      this.setState({nextPageCount : counter})
+      this.setState({tableRows : counter},()=>{
+        this.setState({totalPages : Math.ceil(this.state.users.length / this.state.tableRows)},()=>{
+          this.setState({tempUserArr : this.state.users.slice(0,counter)})
+        })
+      }) 
+    }
+
+    setTableRows = (e: React.FocusEvent<HTMLInputElement>) =>(
+      typeof parseInt(e.currentTarget.value) === 'number' ? this.setTable(parseInt(e.currentTarget.value)) : ''
+    )
+
   render (){
   return (
     <div onClick={this.closeOptions} ref={this.containerRef} className='container'>
     <Navbar />
     <div className='dashboard-container'>
-        <Sidebar />
+        <Sidebar activeClass={'users'} detailClass={'none'}/>
         <div className='dashboard'>
          <div className='dashboard-content'>
           <header>
@@ -179,39 +194,48 @@ export default class Dashboard extends React.Component {
                                     <label htmlFor="organization">organization
                                     </label>
                                     <input 
-                                    type="text" id='organization'/>
+                                    type="text" 
+                                    autoComplete='off'
+                                    id='organization'/>
                                 </div>
                                 <div>
                                     <label htmlFor="username">username
                                     </label>
                                     <input 
-                                    type="text" id='username'/>
+                                    type="text" 
+                                    autoComplete='off'
+                                    id='username'/>
                                 </div>
                                 <div>
                                     <label htmlFor="email">email
                                     </label>
-                                    <input 
-                                    autoComplete= "false" 
-                                    type="email" id='email'/>
+                                    <input
+                                    type="text" 
+                                    autoComplete='off'
+                                    id='email'/>
                                 </div>
                                 <div>
                                     <label htmlFor="date">date
                                     </label>
                                     <input 
-                                    placeholder='' type="date" id='date'/>
+                                    placeholder='' type="date" 
+                                    autoComplete='off'
+                                    id='date'/>
                                 </div>
                                 <div>
                                     <label htmlFor="phone-number">phone number
                                     </label>
                                     <input 
                                     type="number"
-                                    autoComplete='' id='phone-number'/>
+                                    autoComplete='off' id='phone-number'/>
                                 </div>
                                 <div>
                                     <label htmlFor="status">status
                                     </label>
                                     <input 
-                                    placeholder='Status' type="text" id='status'/>
+                                    placeholder='Status' type="text" 
+                                    autoComplete='off'
+                                    id='status'/>
                                 </div>
                                 <div className='filter-btn-container'>
                                     <button className='reset-btn' onClick={this.resetUsers}>reset</button>
@@ -243,7 +267,7 @@ export default class Dashboard extends React.Component {
                     <div ref={this.menuListRef} className='options-menu'>
                       <div className='eye'>
                         <BsEye />
-                        <p>View Details</p>
+                        <Link className='route-link' to={`user/${userDetail.id}`}>View Details</Link>
                       </div>
                       <div>
                         <div><img src={UserTimes} alt="bad user" /></div>
@@ -298,7 +322,7 @@ export default class Dashboard extends React.Component {
                 <div>
                   <div>Showing
                   <span className='current-page-no'>
-                    100 
+                    <input onBlur={(e)=>this.setTableRows(e)} type="text" /> 
                   <TfiAngleDown />
                   </span>
                     out of 
@@ -307,27 +331,34 @@ export default class Dashboard extends React.Component {
                 </div>
               </div>
               <div className='users-count'>
-                <div onClick={this.showPrevPage} className='prev-page'><TfiAngleLeft /></div>
+                <div onClick={this.changePages} className='prev-page'><TfiAngleLeft /></div>
                 <div className='pages'>
-                  <span className='pages-current'>{this.state.pageCount}</span>
-                  <span>{this.state.pageCount + 1}</span>
-                  <span>{this.state.pageCount + 2}</span>
+                  <span className='pages-current'>{
+                  this.state.pageCount <=  this.state.totalPages ? this.state.pageCount : ''
+                  }</span>
+                  <span>{
+                  this.state.pageCount + 1 <=  this.state.totalPages ? this.state.pageCount + 1 : ''
+                  }</span>
+                  <span>
+                    {
+                        this.state.pageCount + 2 <=  this.state.totalPages ? this.state.pageCount + 2 : ''
+                    }</span>
                   {
-                    this.state.pageCount + 5 >=  Math.ceil(this.state.users.length / 9) ? <span>{
-                        this.state.pageCount + 3 >  Math.ceil(this.state.users.length / 9) ? '' :this.state.pageCount + 3
+                    this.state.pageCount + 5 >=  this.state.totalPages ? <span>{
+                        this.state.pageCount + 3 >  this.state.totalPages ? '' :this.state.pageCount + 3
 
                     }</span> : <span>...</span>
                   }
                   {
-                      this.state.pageCount + 4 >= Math.ceil(this.state.users.length / 9) ? <span>{
-                        this.state.pageCount === 12 ? <span>Math.ceil(this.state.users.length / 9)</span> : <span></span>
-                      }</span> : <span>{Math.ceil(this.state.users.length / 9) - 1}</span>
+                      this.state.pageCount + 4 >= this.state.totalPages ? <span>{
+                        this.state.pageCount === 12 ? <span></span> : <span></span>
+                      }</span> : <span>{this.state.totalPages - 1}</span>
                   }
                   {
-                      this.state.pageCount + 4 >= Math.ceil(this.state.users.length / 9) ? '' : <span className=''>{Math.ceil(this.state.users.length / 9)}</span>
+                      this.state.pageCount + 4 >= this.state.totalPages ? '' : <span className=''>{this.state.totalPages}</span>
                   }
                 </div>
-                <div onClick={this.showNextPage} className='next-page'><TfiAngleRight /></div>
+                <div onClick={this.changePages} className='next-page'><TfiAngleRight /></div>
               </div>
             </div>
           </footer>
