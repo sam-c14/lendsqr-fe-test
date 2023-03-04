@@ -1,104 +1,112 @@
-$primary-color : #213F7D;
-$secondary-color : #39cdcc;
-$text-color : #545F7D;
-$bg : #ffffff3f;
-$font-family-next-bold :  "AvenirNextLTPro-Bold";
-$font-family-next-light :  "AvenirNextLTPro-It";
-$font-family-next-regular :  "AvenirNextLTPro-Regular";
-$opacity-value:0.5;
-$inactive-bg:  #545f7d28;;
+$primary-color: #213f7d;
+$secondary-color: #39cdcc;
+$text-color: #545f7d;
+$bg: #ffffff3f;
+$font-family-next-bold: "AvenirNextLTPro-Bold";
+$font-family-next-light: "AvenirNextLTPro-It";
+$font-family-next-regular: "AvenirNextLTPro-Regular";
+$opacity-value: 0.5;
+$inactive-bg: #545f7d28;
 $pending-bg: #e9b30023;
-$blacklisted-bg:  #e4033b28;
-$active-bg:#39cd6327;
-$inactive-text-color:  #545F7D;;
-$pending-text-color: #E9B200;
-$blacklisted-text-color:  #E4033B;
-$active-text-color:#39CD62;
+$blacklisted-bg: #e4033b28;
+$active-bg: #39cd6327;
+$inactive-text-color: #545f7d;
+$pending-text-color: #e9b200;
+$blacklisted-text-color: #e4033b;
+$active-text-color: #39cd62;
 
-@mixin flexCenter{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-@mixin media-md{
-    @media screen and (max-width : 768px) {
-        @content
-    }
+@mixin media-md {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
 }
-@mixin media-lg{
-    @media screen and (max-width : 1024px) {
-        @content
-    }
+@mixin media-lg {
+  @media screen and (max-width: 1024px) {
+    @content;
+  }
 }
-@mixin media-sm{
-    @media screen and (max-width : 667px) {
-        @content
-    }
+@mixin media-sm {
+  @media screen and (max-width: 667px) {
+    @content;
+  }
 }
 
-*{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
-.status-inactive{
-    color: $inactive-text-color;
-    background: $inactive-bg;
+.status-inactive {
+  color: $inactive-text-color;
+  background: $inactive-bg;
 }
-.status-blacklisted{
-    background: $blacklisted-bg;
-    color: $blacklisted-text-color;
+.status-blacklisted {
+  background: $blacklisted-bg;
+  color: $blacklisted-text-color;
 }
-.status-active{
-    background: $active-bg;
-    color: $active-text-color;
+.status-active {
+  background: $active-bg;
+  color: $active-text-color;
 }
-.status-pending{
-    background: $pending-bg;
-    color: $pending-text-color;
+.status-pending {
+  background: $pending-bg;
+  color: $pending-text-color;
 }
 .prevent-select {
-    -webkit-user-select: none;
-    /* Safari */
-    -ms-user-select: none;
-    /* IE 10 and IE 11 */
-    user-select: none;
-    /* Standard syntax */
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE 10 and IE 11 */
+  user-select: none;
+  /* Standard syntax */
 }
-li{
-    list-style-type: none;
+li {
+  list-style-type: none;
 }
-.opacity-0{
-    opacity: 0;
+.opacity-0 {
+  opacity: 0;
 }
-.home-link{
-    color: $primary-color;
-    text-decoration: none;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    transition: all .4s;
+.home-link {
+  color: $primary-color;
+  text-decoration: none;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  transition: all 0.4s;
 
-    &:hover{
-        scale: 1.1;
-    }
+  &:hover {
+    scale: 1.1;
+  }
 }
-#active{
-    color: $primary-color;
-    font-weight: 500 !important;
-    border-left: 5px solid transparent;
-    background: rgba($secondary-color , $alpha: 0.1);
-    border-left-color: rgba($secondary-color, $alpha: 1);
+#active {
+  color: $primary-color;
+  font-weight: 500 !important;
+  border-left: 5px solid transparent;
+  background: rgba($secondary-color, $alpha: 0.1);
+  border-left-color: rgba($secondary-color, $alpha: 1);
 }
-.active-nav-link{
-    border-bottom-color: $secondary-color !important;
-    color: $secondary-color;
+.active-nav-link {
+  border-bottom-color: $secondary-color !important;
+  color: $secondary-color;
 }
 .route-link {
-    text-decoration: none;
-    color: inherit;
-    margin-left: 0.5em;
+  text-decoration: none;
+  color: inherit;
+  margin-left: 0.5em;
 }
 .block {
-    display: block !important;
+  display: block !important;
+}
+@media screen and (min-width: 2560px) {
+  .container {
+    padding-inline: 20vw;
+  }
+  .sidebar {
+    width: 25rem !important;
+  }
 }
