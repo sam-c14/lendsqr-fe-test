@@ -1,1 +1,2 @@
 This is a frontend assessment test for lendsqr done in react, sass and typescript.
+The home page is the login page, without enetering some value for the email and password fields, you can't navigate to the users page, once values are enetered in both fields, then click the login button to login which navigates to the users page, click on the filter icon to toggle modal to filter users and the options icon which is the three vertical dots on each users information row in the table to navigate to the view user details page view that specific users info.
