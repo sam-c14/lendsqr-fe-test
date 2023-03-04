@@ -67,6 +67,11 @@ class Users extends React.Component {
           const totalPages = Math.ceil(
             this.state.users.length / this.state.tableRows
           );
+          const rowCount = document.getElementById(
+            "row-count"
+          ) as HTMLInputElement;
+          rowCount.value = this.state.tableRows + "";
+          console.log(rowCount.value);
           this.setState({ totalPages: totalPages }, () => {
             this.setState({ isLoading: false });
             this.setState({
@@ -80,7 +85,6 @@ class Users extends React.Component {
       })
       .catch((err) => {
         this.setState({ error: err.message });
-        console.log(err.message);
       });
   }
   componentWillUnmount() {
