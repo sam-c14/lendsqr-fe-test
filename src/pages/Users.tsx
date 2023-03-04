@@ -369,6 +369,7 @@ class Users extends React.Component {
                         Showing
                         <span className="current-page-no">
                           <input
+                            id="row-count"
                             onBlur={(e) => this.setTableRows(e)}
                             type="text"
                           />
