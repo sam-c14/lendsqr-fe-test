@@ -63,12 +63,12 @@ class Users extends React.Component {
     fetch("https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users ")
       .then((info) => info.json())
       .then((data) => {
-        const totalPages = Math.ceil(
-          this.state.users.length / this.state.tableRows
-        );
         this.setState({ users: data }, () => {
-          this.setState({ isLoading: false });
+          const totalPages = Math.ceil(
+            this.state.users.length / this.state.tableRows
+          );
           this.setState({ totalPages: totalPages }, () => {
+            this.setState({ isLoading: false });
             this.setState({
               tempUserArr: this.state.users.slice(
                 this.state.prevPageCount,
@@ -160,7 +160,7 @@ class Users extends React.Component {
   setTableRows = (e: React.FocusEvent<HTMLInputElement>) =>
     typeof parseInt(e.currentTarget.value) === "number"
       ? this.setTable(parseInt(e.currentTarget.value))
-      : console.log("set");
+      : "";
 
   render() {
     return (
