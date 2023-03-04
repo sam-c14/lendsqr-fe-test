@@ -68,12 +68,13 @@ class Users extends React.Component {
         );
         this.setState({ users: data }, () => {
           this.setState({ isLoading: false });
-          this.setState({ totalPages: totalPages });
-          this.setState({
-            tempUserArr: this.state.users.slice(
-              this.state.prevPageCount,
-              this.state.nextPageCount
-            ),
+          this.setState({ totalPages: totalPages }, () => {
+            this.setState({
+              tempUserArr: this.state.users.slice(
+                this.state.prevPageCount,
+                this.state.nextPageCount
+              ),
+            });
           });
         });
       })
