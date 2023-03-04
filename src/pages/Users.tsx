@@ -67,6 +67,8 @@ class Users extends React.Component {
           this.state.users.length / this.state.tableRows
         );
         this.setState({ users: data }, () => {
+          this.setState({ isLoading: false });
+          this.setState({ totalPages: totalPages });
           this.setState({
             tempUserArr: this.state.users.slice(
               this.state.prevPageCount,
@@ -74,9 +76,6 @@ class Users extends React.Component {
             ),
           });
         });
-        this.setState({ isLoading: false });
-
-        this.setState({ totalPages: totalPages });
       })
       .catch((err) => {
         this.setState({ error: err.message });
