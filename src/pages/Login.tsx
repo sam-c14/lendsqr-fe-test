@@ -16,13 +16,20 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  function submitForm() {
+  function submitForm(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault();
     const email = document.getElementById("email-input") as HTMLInputElement;
     const password = document.getElementById(
       "password-input"
     ) as HTMLInputElement;
     if (email.value.trim() !== "" && password.value.trim() !== "") {
       navigate("/users");
+    } else {
+      const errMsg = document.getElementById("err-msg") as HTMLDivElement;
+      errMsg.style.display = "block";
+      setTimeout(() => {
+        errMsg.style.display = "none";
+      }, 1500);
     }
   }
   return (
@@ -63,9 +70,12 @@ const Login = () => {
               <div className="forgot-password">
                 <p>forgot password?</p>
               </div>
+              <div id="err-msg">
+                <p>Enter some value for the email and password!!!</p>
+              </div>
               <div className="login-btn-container">
                 <button
-                  onClick={submitForm}
+                  onClick={(e) => submitForm(e)}
                   type="submit"
                   className="login-btn-btn"
                 >
