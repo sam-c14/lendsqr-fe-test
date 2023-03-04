@@ -69,8 +69,7 @@
                 display: table;
                 width: 100%;
                 padding-inline: 1rem;
-                // font-size: 0.81rem;
-                
+    
                 .table-head-row{
                     text-transform: uppercase;
                     font-weight: 600;
@@ -85,9 +84,9 @@
 
                     td{
                         text-align: start;
-                        // font-size: 0.81rem;
-                        padding-block: 0.5rem;
+                        padding-block: 0.7rem;
                         margin-right: 0.5rem;
+                        white-space: nowrap;
                     }
                 }
                 tr{
@@ -132,7 +131,7 @@
                                  }
                             }
 
-                            .eye{
+                            .view-details{
                                 @include flexCenter;
                                 width: 80%;
                             }
@@ -160,6 +159,11 @@
                 &-tb{
                 .capitalize{
                     text-transform: capitalize;
+
+                    .blacklist,.activate,.view-details-sm{
+                        display: flex;
+                        gap: 0.5rem;
+                    }
                     }
                 }
             }
@@ -237,7 +241,4 @@
             }
         }
     }
-}
-.block{
-    display: block !important;
 }

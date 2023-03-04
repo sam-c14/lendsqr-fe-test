@@ -1,3 +1,21 @@
+@include media-lg{
+    main {
+    
+            table {
+    
+                tr {
+    
+                    .options {
+    
+                        &-menu {
+                            width: 18vw !important;
+                        }
+                    }
+                }
+            }
+        }
+}
+
 @include media-md{
     .dashboard {
             display: flex;
@@ -7,7 +25,7 @@
             &-content {
                 width: 100% !important;
                 padding-inline: 0.5rem !important;
-                padding-bottom: 5vh !important;
+                padding-bottom: 13vh !important;
 
                 main{ 
 
@@ -24,7 +42,15 @@
                     }
                 }
             }
-    }   } 
+
+            footer{
+
+                .users-count{
+                    width: 50% !important;
+                }
+            }
+        } 
+    }
 }
 @include media-sm{
     .dashboard {
@@ -35,7 +61,7 @@
             &-content {
                 width: 100% !important;
                 padding-inline: 0.5rem !important;
-                padding-bottom: 5vh !important;
+                padding-bottom: 15vh !important;
             }
     }
     section{
@@ -62,6 +88,26 @@
     }   
     
     footer{
-        display: none;
+        
+        .footer-content{
+            display: flex !important;
+            flex-wrap: wrap;
+
+            .current-page, .users-count{
+                width: 100% !important;
+            }
+
+            .current-page {
+                margin-bottom: 1rem;
+                div{
+                    width: 100%;
+                    div{
+                        .current-page-no{
+                            width: 15% !important;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

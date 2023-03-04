@@ -22,7 +22,6 @@
 
        & > div{
             display: flex;
-            justify-content: space-between;
             align-items: center;
             margin-block: 1rem;
             padding-block: 0.5rem;
@@ -30,6 +29,13 @@
             cursor: pointer;
         }
 
+        .organization{
+            padding-right: 2rem;
+            p {
+                    margin-left: 1rem;
+                    margin-right: 0.5rem;
+            }
+        }
 
         .dash-home{
             justify-content: start !important;
