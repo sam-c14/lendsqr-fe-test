@@ -11,9 +11,11 @@ import UserTimes from '../assests/images/user-times.svg'
 import UserBar from '../assests/images/UserBar.svg'
 import {Link} from "react-router-dom";
 import {Card,UserDetail2,User} from '../types/globalTypes'
+import {filterUsers,hideFilter,showFilter} from '../mixins/FilterUsers'
+import { changePages } from '../mixins/TogglePages'
 import React from 'react'
 
-export default class Dashboard extends React.Component {
+ class Users extends React.Component {
    cards : Card = [
     {
       src : TotalUsers,
@@ -47,9 +49,9 @@ export default class Dashboard extends React.Component {
     pageCount : 1,
     isFiltered : false,
     totalPages : 0,
-    tableRows : 9
+    tableRows : 9,
+    error : ''
   }
-
     tempUserDetails = [1,2,3,4,5,6,7,8,9,10]
 
     optionsBtnRef = React.createRef<HTMLSpanElement>()
@@ -59,10 +61,15 @@ export default class Dashboard extends React.Component {
   componentDidMount() {
     document.documentElement.classList.add('disable-scroll')
     fetch('https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users ').then(info=>info.json()).then(data=>{
-        this.setState({users : data,isLoading : false,tempUserArr : this.state.users.slice(this.state.prevPageCount,this.state.nextPageCount)})
-        console.log(this.state.users)
-        this.setState({totalPages : Math.ceil(this.state.users.length / this.state.tableRows)})
-    }).catch(err=>console.log(err))
+        const totalPages = Math.ceil(this.state.users.length / this.state.tableRows)
+        this.setState({users : data})
+        this.setState({isLoading : false})
+        this.setState({tempUserArr : this.state.users.slice(this.state.prevPageCount,this.state.nextPageCount)})
+        this.setState({totalPages : totalPages})
+    }).catch(err=>{
+      this.setState({error : err.message})
+      console.log(err.message)
+    })
   }
   componentWillUnmount() {
     document.documentElement.classList.remove('disable-scroll')
@@ -71,75 +78,28 @@ export default class Dashboard extends React.Component {
   closeOptions = (e : React.MouseEvent<HTMLDivElement>)=>{
       const optionsBtns: Element[] = Array.from( document.getElementsByClassName('options-btn'));
 
-        optionsBtns.map((btn)=>[
-          e.target === btn.firstElementChild || e.target === btn.nextElementSibling || e.target ===  btn.nextElementSibling?.firstElementChild || e.target === btn.nextElementSibling?.firstElementChild?.nextElementSibling || e.target ===  btn.nextElementSibling?.lastElementChild? console.log('worked') : btn.nextElementSibling?.classList.remove('block')
-        ])// To toggle optionsMenu if the outside of the container is clicked
+      optionsBtns.map((btn)=>(
+          e.target === btn.firstElementChild || e.target === btn.nextElementSibling || e.target ===  btn.nextElementSibling?.firstElementChild || e.target === btn.nextElementSibling?.firstElementChild?.nextElementSibling || e.target ===  btn.nextElementSibling?.lastElementChild? '' : btn.nextElementSibling?.classList.remove('block')
+      ))
   }
 
   checkPageCount = (pageCount : number) =>(
     pageCount <= this.state.totalPages ?   this.setState({pageCount : pageCount}) : ''
   )
 
-  showFilter = ()=>(
-    !document.querySelector('.filter')?.classList.contains('block') ? document.querySelector('.filter')?.classList.add('block') :  document.querySelector('.filter')?.classList.remove('block')
-  )
   showOptions(e : React.MouseEvent<HTMLSpanElement>){
     e.currentTarget.nextElementSibling?.classList.add('block')
     }
 
-    changePages = (e : React.MouseEvent<HTMLDivElement>) =>(
-        this.state.prevPageCount > 0 && e.currentTarget.classList.contains("prev-page") ? this.showPrevPage() : '',
-        this.state.nextPageCount < this.state.users.length && e.currentTarget.classList.contains('next-page') ? this.showNextPage() : ''
-    )
+    element = this
 
-    showPrevPage = () =>{
-        const nextPage = this.state.prevPageCount
-        const prevPage = this.state.prevPageCount - this.state.tableRows
-        const pageCount = this.state.pageCount - 1
-        this.checkPageCount(pageCount)
-        this.setState({prevPageCount : prevPage})
-        this.setState({nextPageCount : nextPage})
-        this.setState({tempUserArr : this.state.users.slice(prevPage,nextPage)})
-    }       
-    showNextPage = () =>{
-        const prevPage = this.state.nextPageCount
-        const nextPage = this.state.nextPageCount + this.state.tableRows
-        const pageCount = this.state.pageCount + 1
-        this.checkPageCount(pageCount)
-        this.setState({prevPageCount : prevPage})
-        this.setState({nextPageCount : nextPage})
-        this.setState({tempUserArr : this.state.users.slice(prevPage,nextPage)})
+    changePages(mixinThis : Users ,e : React.MouseEvent<HTMLDivElement>){
+        
     }
-    hideFilter = (e :  React.MouseEvent<HTMLButtonElement>) =>(
-        e.preventDefault(),
-        document.querySelector('.filter')?.classList.remove('block')
-    )
-    filterUsers = (e :  React.MouseEvent<HTMLButtonElement>) => {
-        this.hideFilter(e)
-        this.setState({isFiltered : true})
-        const filter = document.querySelector(".filter") as HTMLDivElement
-        filter.classList.add('filter-alt')
-        const org = document.getElementById("organization") as HTMLInputElement
-        const userName = document.getElementById("username") as HTMLInputElement
-        const email = document.getElementById("email") as HTMLInputElement
-        const phoneNumber = document.getElementById("phone-number") as HTMLInputElement
-        const date = document.getElementById("date") as HTMLInputElement
-        const Status = document.getElementById("status") as HTMLInputElement
+    filterUsers(Users : Users, e: React.MouseEvent<HTMLButtonElement>){}
 
-        // Yet to sort out the noPrevPage when state is 0 or more than value
-        // Clean up the code
-        // Work on responsiveness to show btns
-
-        this.setState({tempUserArr : 
-            this.state.users.filter((user)=>(
-             user.orgName === org.value || user.userName === userName.value || user.email === email.value || user.phoneNumber === phoneNumber.value ? [user] : ''
-            ))
-        })
-        org.value = userName.value = email.value = phoneNumber.value = ''
-         
-    }
     resetUsers = (e : React.MouseEvent<HTMLButtonElement>) =>{
-        this.hideFilter(e)
+        hideFilter(e)
         this.setState({isFiltered : true})
         const filter = document.querySelector(".filter") as HTMLDivElement
         filter.classList.remove('filter-alt')
@@ -185,9 +145,12 @@ export default class Dashboard extends React.Component {
           </section>
           <main>
             {
-                this.state.isLoading ? <div>Loading...</div> : <table className='lg-table'>
-                 <th>
-                  <td>organization <img onClick={this.showFilter} src={UserBar} alt="user-bar" />
+              this.state.isLoading ? <div>{
+                this.state.error !== '' ? this.state.error + ', reload and try again' : "Loading"
+                }</div> : <table className='lg-table'>
+                 <thead>
+                  <tr className='table-head-row'>
+                  <td>organization <img onClick={showFilter} src={UserBar} alt="user-bar" />
                      <div className='filter'>
                         <form action="">
                                 <div>
@@ -239,19 +202,21 @@ export default class Dashboard extends React.Component {
                                 </div>
                                 <div className='filter-btn-container'>
                                     <button className='reset-btn' onClick={this.resetUsers}>reset</button>
-                                    <button className='filter-btn' onClick={this.filterUsers}>filter</button>
+                                    <button className='filter-btn' onClick={(e)=>{this.filterUsers(this.element, e)}}>filter</button>
                                 </div>
                         </form>
                     </div>
                   </td>
-                  <td>username <img onClick={this.showFilter} src={UserBar} alt="user-bar" /></td>
-                  <td>email <img onClick={this.showFilter} src={UserBar} alt="user-bar" /></td>
-                  <td>phone number <img onClick={this.showFilter} src={UserBar} alt="user-bar" /></td>
-                  <td>date joined <img onClick={this.showFilter} src={UserBar} alt="user-bar" /></td>
-                  <td>status <img onClick={this.showFilter} src={UserBar} alt="user-bar" /></td>
+                  <td>username <img onClick={showFilter} src={UserBar} alt="user-bar" /></td>
+                  <td>email <img onClick={showFilter} src={UserBar} alt="user-bar" /></td>
+                  <td>phone number <img onClick={showFilter} src={UserBar} alt="user-bar" /></td>
+                  <td>date joined <img onClick={showFilter} src={UserBar} alt="user-bar" /></td>
+                  <td>status <img onClick={showFilter} src={UserBar} alt="user-bar" /></td>
                   <td></td>
-                </th>
-                {
+                  </tr>
+                 </thead>
+                <tbody>
+                  {
                   this.state.tempUserArr.map((userDetail,index)=>(
                   <tr key={index}>
                     <td className='organization'>{userDetail.orgName}</td>
@@ -281,13 +246,15 @@ export default class Dashboard extends React.Component {
                   </tr>
                   ))
                 }
+                </tbody>
             </table>
             }
-            <table className="sm-table">
+            <div className="sm-table">
               {
                 this.state.tempUserArr.map((userDetail,index)=>(
                   <table  className="sm-table-tb" key={index}>
-                  <tr className='capitalize'>
+                    <thead>
+                    <tr className='capitalize'>
                     <td>organization</td>
                     <td className='organization'>{userDetail.orgName}</td>
                   </tr>
@@ -311,10 +278,11 @@ export default class Dashboard extends React.Component {
                     <td>status</td>
                     <td className='status'><div className="status-active">Active</div></td>
                   </tr>
+                    </thead>
                   </table>
                   ))
                 }
-            </table>
+            </div>
           </main>
           <footer>
             <div className='footer-content'>
@@ -331,7 +299,7 @@ export default class Dashboard extends React.Component {
                 </div>
               </div>
               <div className='users-count'>
-                <div onClick={this.changePages} className='prev-page'><TfiAngleLeft /></div>
+                <div onClick={(e)=>this.changePages(this.element,e)} className='prev-page'><TfiAngleLeft /></div>
                 <div className='pages'>
                   <span className='pages-current'>{
                   this.state.pageCount <=  this.state.totalPages ? this.state.pageCount : ''
@@ -358,7 +326,7 @@ export default class Dashboard extends React.Component {
                       this.state.pageCount + 4 >= this.state.totalPages ? '' : <span className=''>{this.state.totalPages}</span>
                   }
                 </div>
-                <div onClick={this.changePages} className='next-page'><TfiAngleRight /></div>
+                <div onClick={(e)=>this.changePages(this.element,e)}className='next-page'><TfiAngleRight /></div>
               </div>
             </div>
           </footer>
@@ -369,3 +337,7 @@ export default class Dashboard extends React.Component {
   )
   }
 }
+
+Users.prototype.filterUsers = filterUsers
+Users.prototype.changePages = changePages
+export default Users

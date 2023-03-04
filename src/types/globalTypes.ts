@@ -1,4 +1,4 @@
-import UserDetails from "../pages/UserDetails"
+import Users from "../pages/Users"
 
 type education = {
     duration : string,
@@ -49,7 +49,8 @@ interface User {
     pageCount : number,
     isFiltered : Boolean,
     totalPages : number,
-    tableRows : number
+    tableRows : number,
+    error : string
 }
 type SidebarType = Array<{src:string,text:string,name : string}>;
-export type {UserDetail,onDetailsPage,UserDetails,Card,User,UserDetail2,SidebarType}
+export type {UserDetail,onDetailsPage,UserDetails,Card,User,UserDetail2,SidebarType,Users}

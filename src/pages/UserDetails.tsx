@@ -15,12 +15,11 @@ const UserDetails = () => {
     const { id } = useParams();
     const [userDetails,setUserDetails] = useState<UserDetail>()
     useEffect(() => {
-        const user = localStorage.getItem("user")
+    const user = localStorage.getItem("user")
         if(!user){
             fetch(`https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${id}`).then(info=>info.json()).then(data=>{
                 setUserDetails(data)
                 localStorage.setItem('user',JSON.stringify(data))
-                console.log(data)
             }).catch(err=>console.log(err))        
         }
         else{
@@ -33,7 +32,7 @@ const UserDetails = () => {
 
     function addActiveClass(e : React.MouseEvent<HTMLLIElement>){
         const links = Array.from(document.querySelectorAll('.details-tab-nav ul li'))
-        links.map((link)=>{
+        links.map((link) => {
             link.classList.remove('active-nav-link')
         })
         e.currentTarget.classList.add('active-nav-link')

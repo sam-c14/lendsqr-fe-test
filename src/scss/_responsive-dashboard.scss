@@ -50,7 +50,8 @@
         display: none !important;
     }
     .sm-table{
-        display: table !important;
+        // display: table !important;
+        display: block !important;
         padding-inline: 0.3rem !important;
 
         table {

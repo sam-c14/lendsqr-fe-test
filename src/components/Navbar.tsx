@@ -20,7 +20,6 @@ const Navbar = () => {
     const [isMenuOpen,setIsMenuOpen] = useState(false)
 
     const menuListRef = useRef<HTMLDivElement>(null)
-    useEffect(() => console.log(menuListRef), [])
     
     const showMenuList = ()=>{
             menuListRef.current?.classList.add('sm-nav-width')
@@ -65,10 +64,7 @@ const Navbar = () => {
                     <GoTriangleDown />
                 </div>
             </div>
-
-            {/* <div className="opaque-bg">
-
-            </div> */}
+            
             <div onClick={showMenuList} className="menu-btn">
                 <HiBars3BottomRight />
             </div>

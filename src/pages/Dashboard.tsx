@@ -151,7 +151,8 @@ export default class Dashboard extends React.Component {
           </section>
           <main>
             <table className='lg-table'>
-                <th>
+                <thead>
+                  <tr className='table-head-row'>
                   <td>organization <img src={UserBar} alt="user-bar" /></td>
                   <td>username <img src={UserBar} alt="user-bar" /></td>
                   <td>email <img src={UserBar} alt="user-bar" /></td>
@@ -159,8 +160,10 @@ export default class Dashboard extends React.Component {
                   <td>date joined <img src={UserBar} alt="user-bar" /></td>
                   <td>status <img src={UserBar} alt="user-bar" /></td>
                   <td></td>
-                </th>
-                {
+                </tr>
+                </thead>
+                <tbody>
+                   {
                   this.usersDetails.map((userDetail,index)=>(
                   <tr key={index}>
                     <td className='organization'>{userDetail.org}</td>
@@ -187,12 +190,14 @@ export default class Dashboard extends React.Component {
                   </tr>
                   ))
                 }
+                </tbody>
             </table>
-            <table className="sm-table">
+            <div className="sm-table">
               {
                 this.usersDetails.map((userDetail,index)=>(
                   <table  className="sm-table-tb" key={index}>
-                  <tr className='capitalize'>
+                    <thead>
+                      <tr className='capitalize'>
                     <td>organization</td>
                     <td className='organization'>{userDetail.org}</td>
                   </tr>
@@ -216,10 +221,11 @@ export default class Dashboard extends React.Component {
                     <td>status</td>
                     <td className='status'><div className={userDetail.statusClass}>{userDetail.status}</div></td>
                   </tr>
+                    </thead>
                   </table>
                   ))
                 }
-            </table>
+            </div>
           </main>
           <footer>
             <div className='footer-content'>
@@ -256,5 +262,3 @@ export default class Dashboard extends React.Component {
   )
   }
 }
-
-// export default Dashboard
